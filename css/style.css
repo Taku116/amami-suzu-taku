@@ -1,0 +1,537 @@
+/* まずブラウザの余白をリセット */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ヘッダー */
+header {
+  font-family: "Montserrat";
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-top: 2px solid #707070;
+  border-bottom: 2px solid #707070;
+  z-index: 1000;
+}
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  transform: translateY(-50%);
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  z-index: 1002;
+}
+
+/* ドロップダウンメニューの基本 */
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  cursor: pointer;
+  position: relative;
+  padding-right: 20px;
+  user-select: none;
+}
+/* 新しいアイコン（SVG）のデザイン */
+.dropdown-toggle::after {
+  content: ""; /* テキストではなく画像を使うので空にする */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;  /* アイコンの幅 */
+  height: 16px; /* アイコンの高さ */
+  
+  /* SVGアイコンを背景画像として指定 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512'%3E%3Cpath fill='%23FFFFFF' d='M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease; /* 回転のアニメーション */
+}
+
+/* 開いたらアイコンを90度回転させる */
+.dropdown-toggle.active::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+.dropdown-menu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: rgba(51, 51, 51, 0);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 150px;
+  list-style: none;
+  z-index: 999;
+}
+
+/* 文字のスタイル集 */
+header h1 {
+
+  position: absolute;
+  top: 50%;
+  left: 44%;
+  transform: translate(-50%, -50%); /* 要素自身のサイズを考慮して真ん中に配置 */
+  margin: 0;
+  font-size: 25px; /* ヘッダーの高さに収まるように調整 */
+  color: #333;
+  font-weight: 500; /* 少し太くして視認性を上げる */
+}
+
+h1 {
+  margin-top: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ホーム */
+.h1_1{
+  margin-top: 70px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.h1_2{
+  margin-top: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.h1_3{
+  margin-top: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.outline {
+  font-family: 'Kiwi Maru', sans-serif;
+  position: relative; /* ← これが重要！afterの基準になります */
+  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: bold;
+  padding-bottom: 5px; /* 下線との間隔 */
+}
+.outline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;                /* 線の太さ */
+  width: 40%;                /* 線の長さ（h2の40%） */
+  background-color: #26466D; /* 線の色：明るいオレンジ */
+  border-radius: 2px;        /* 少し丸くする（おしゃれ度UP） */
+}
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  margin-left: 10px;
+}
+.info-label {
+  font-family: 'Kiwi Maru', sans-serif;
+  font-size: 13px;
+  width: 80px;              /* 見出し幅を固定 */
+  font-weight: bold;
+  color: #333;
+}
+.info-detail {
+  font-family: 'Kiwi Maru', sans-serif;
+  font-size: 13px;
+  flex: 1;                  /* 残りの幅を自動で使う */
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 持ち物 */
+.item-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 60px;
+}
+
+.category {
+  padding: 0px;
+}
+
+.category h2 {
+  font-family: "Kiwi Maru", sans-serif;
+  font-size: 18px;
+  padding-bottom: 5px;
+  margin-bottom: 3px;
+  margin-left: 10px;
+  position: relative;
+}
+.category h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;                /* 線の太さ */
+  width: 50%;                /* 線の長さ（h2の40%） */
+  background-color: #26466D ; /* 線の色：明るいオレンジ */
+  border-radius: 2px;        /* 少し丸くする（おしゃれ度UP） */
+  margin-bottom: 0px;
+}
+
+.item-list {
+  font-family: "Kiwi Maru", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 5px;
+  gap: 5px;
+}
+.item-wrapper {
+  display: flex;
+  flex-direction: column; /* ラベルと補足を縦に並べる */
+}
+.item-note {
+  font-family: 'Kiwi Maru', sans-serif; /* フォントを他のテキストと合わせる */
+  font-size: 12px;           /* 文字を小さくする */
+  color: #666;              /* 文字色を少しグレーにする */
+  padding-left: 32px;      /* チェックボックスの幅と隙間を考慮して左に余白を設ける */
+  margin-top: 0px;           /* 持ち物との間の少しの余白 */
+  margin-bottom: 0px;        /* 次の項目との間の余白 */
+  margin-left: 0;
+  margin-right: 0;
+  line-height: 1.4;          /* 行間を調整 */
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+.last-updated {
+  font-size: 13px;
+  color: #888;
+  font-family: 'Montserrat', sans-serif;
+  text-align: right;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 70px; /* ← ヘッダーの高さ分、余白を大きくする */
+}
+
+
+/* スケジュール */
+
+/* スケジュールページ 注意事項ボックス */
+.notes-box {
+  max-width: 800px;
+  /* 上(ヘッダーとの距離)・左右(中央寄せ)・下(DAY1との距離) の余白 */
+  margin: 80px auto 10px auto; 
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 2px solid #26466D ; /* オレンジ系の枠線 */
+  background-color: #E6F0FA; /* 薄いクリーム色の背景 */
+  border-radius: 8px;      /* 角を少し丸める */
+  padding: 20px 30px;      /* ボックスの内側の余白 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  scroll-margin-top: 60px;
+}
+
+.notes-box h4 {
+  font-family: 'Kiwi Maru', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #A9BDDB; /* 見出しの下に点線 */
+}
+
+.notes-box ul {
+  margin: 0;
+  padding-left: 20px; /* リストの左側の余白 */
+}
+
+.notes-box li {
+  font-family: 'Kiwi Maru', sans-serif;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 8px; /* 各項目間の余白 */
+}
+
+/* 最後の項目の下の余白は削除 */
+.notes-box li:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-container {
+  /* ヘッダーと被らないように上部に余白を設定 */
+  margin-bottom: 50px; 
+  margin-top: 70px;
+  padding: 0px 30px;
+  /* PC表示でも見やすいように最大幅を設定 */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.day-section {
+  margin-bottom: 40px;
+  scroll-margin-top: 60px;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 50px;
+  padding-left: 20px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background-color: #26466D ;
+  border-radius: 2px;  /* ← これで丸くなる */
+}
+
+.timeline-item {
+  position: relative;
+  /* 各予定の間のスペース */
+  margin-bottom: 14px; 
+}
+
+/* タイムラインの丸いマーカー */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  /* 縦線の中心に配置するための調整 */
+  left: -24px; 
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border: 3px solid #26466D ;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-time {
+
+  position: absolute;
+  /* マーカーのさらに左に配置 */
+  left: -115px; 
+  top: 2px;
+  width: 80px;
+  text-align: right;
+  font-family: 'Kiwi Maru', sans-serif;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.timeline-content {
+  padding-left: 6px; 
+}
+
+.timeline-content h3 {
+  font-family: 'Kiwi Maru', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 0px 0;
+  color: #333;
+}
+
+/* タイムライン内のpタグは既存のスタイルを上書き */
+.timeline-content p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+  /* pタグのデフォルトマージンをリセット */
+  margin: 0; 
+  font-family: 'Kiwi Maru', sans-serif;
+}
+
+.first-hday {
+  margin-top: 0px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+.hday {
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 20px; /* 線とDAYの文字の間の余白 */
+  border-top: 2px dotted #A9BDDB; /* 上側に引く点線 */
+}
+.hdate {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* アイコンに関する */
+.menu-icon {
+  position: fixed;     /* ← 画面に固定 */
+  top: 0;              /* 上から0px */
+  left: 0;             /* 左から0px */
+  font-size: 30px;
+  padding: 3px 15px;
+  cursor: pointer;
+  z-index: 1001;       /* メニューより上に表示 */
+}
+
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -150px; /* ← これで隠れるはず */
+  width: 150px;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.9);
+  color: white;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.side-nav.active {
+  left: 0;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav ul li {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.side-nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* --- 会計ページ --- */
+.accounting-container {
+  /* ヘッダーと被らないように調整 */
+  padding: 90px 20px 40px; 
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Kiwi Maru', sans-serif;
+}
+
+.day-accounting {
+  margin-bottom: 35px;
+  background-color: #fff;
+  border: 2px solid #A9BDDB; /* 既存の色を使用 */
+  border-radius: 8px;
+  padding: 20px 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.day-accounting h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: #26466D; /* 既存の色を使用 */
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #E6F0FA; /* 既存の色を使用 */
+}
+
+/* 表のスタイル */
+.accounting-container table {
+  width: 100%;
+  border-collapse: collapse; /* ボーダーを一体化 */
+  margin-bottom: 15px;
+}
+
+.accounting-container th,
+.accounting-container td {
+  border-bottom: 1px solid #E6F0FA;
+  padding: 12px 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+/* 表のヘッダー行 */
+.accounting-container th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* 金額の列は右揃えにする */
+.accounting-container td:last-child,
+.accounting-container th:last-child {
+  text-align: right;
+}
+
+/* 日ごとの合計 */
+.day-total {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.day-total span:first-child {
+  margin-right: 15px;
+}
+
+/* 総合計 */
+.grand-total {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #26466D; /* 既存の色を使用 */
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.grand-total h3 {
+  margin: 0 0 10px 0;
+  font-family: 'Kiwi Maru', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.grand-total p {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
